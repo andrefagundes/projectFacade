@@ -1,4 +1,3 @@
-
 import Address from '../../../@shared/domain/value-object/address'
 import Id from '../../../@shared/domain/value-object/id.value-object'
 import UseCaseInterface from '../../../@shared/usecase/use-case.interface'
@@ -17,7 +16,7 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
     input: GenerateInvoiceUseCaseInputDto,
   ): Promise<GenerateInvoiceUseCaseOutputDto> {
     const props = {
-      id: new Id(),
+      id: new Id(input.id),
       name: input.name,
       document: input.document,
       address: new Address({
