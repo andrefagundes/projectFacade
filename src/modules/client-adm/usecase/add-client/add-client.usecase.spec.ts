@@ -17,17 +17,17 @@ describe("Add Client use case unit test", () => {
     const usecase = new AddClientUseCase(repository)
 
     const input = {
-      name: "Lucian",
-      email: "lucian@123.com",
-      document: "1234-5678",
-      address: new Address(
-        "Rua 123",
-        "99",
-        "Casa Verde",
-        "Criciúma",
-        "SC",
-        "88888-888",
-      )
+      name: 'Andre',
+      email: 'amfcom@gmail.com',
+      document: '95846575254',
+      address: new Address({
+        street: 'Rua João José',
+        number: '425',
+        complement: 'Casa Amarela',
+        city: 'João Pinheiro',
+        state: 'MG',
+        zipCode: '38770000',
+      }),
     }
 
     const result =  await usecase.execute(input)

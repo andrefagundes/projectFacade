@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize-typescript"
-import { ClientModel } from "./client.model"
-import ClientRepository from "./client.repository"
-import Client from "../domain/client.entity"
-import Id from "../../@shared/domain/value-object/id.value-object"
-import Address from "../../@shared/domain/value-object/address"
+import Address from '../../@shared/domain/value-object/address'
+import Id from '../../@shared/domain/value-object/id.value-object'
+import Client from '../domain/client.entity'
+import { ClientModel } from './client.model'
+import ClientRepository from './client.repository'
 
 describe("Client Repository test", () => {
 
@@ -25,28 +25,26 @@ describe("Client Repository test", () => {
     await sequelize.close()
   })
 
-  it("should create a client", async () => {
-
+  it('should create a client', async () => {
     const client = new Client({
-      id: new Id("1"),
-      name: "Lucian",
-      email: "lucian@teste.com",
-      document: "1234-5678",
-      address: new Address(
-        "Rua 123",
-        "99",
-        "Casa Verde",
-        "Criciúma",
-        "SC",
-        "88888-888"
-      )
-      // address: "Rua 123",
+      id: new Id('1'),
+      name: 'Andre',
+      email: 'amfcom@gmail.com',
+      document: '92930654124',
+      address: new Address({
+        street: 'Rua João José',
+        number: '425',
+        complement: 'Casa Amarela',
+        city: 'João Pinheiro',
+        state: 'MG',
+        zipCode: '38770000',
+      }),
     })
 
     const repository = new ClientRepository()
     await repository.add(client)
 
-    const clientDb = await ClientModel.findOne({ where: { id: "1" } })
+    const clientDb = await ClientModel.findOne({ where: { id: '1' } })
 
     expect(clientDb).toBeDefined()
     expect(clientDb.id).toEqual(client.id.id)
@@ -63,21 +61,20 @@ describe("Client Repository test", () => {
     expect(clientDb.updatedAt).toStrictEqual(client.updatedAt)
   })
 
-  it("should find a client", async () => {
-
+  it('should find a client', async () => {
     const client = await ClientModel.create({
       id: '1',
-      name: 'Lucian',
-      email: 'lucian@123.com',
-      document: "1234-5678",
-      street: "Rua 123",
-      number: "99",
-      complement: "Casa Verde",
-      city: "Criciúma",
-      state: "SC",
-      zipcode: "88888-888",      
+      name: 'Andre',
+      email: 'amfcom@gmail.com',
+      document: '92930654124',
+      street: 'Rua João José',
+      number: '425',
+      complement: 'Casa Amarela',
+      city: 'João Pinheiro',
+      state: 'MG',
+      zipcode: '38770000',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     })
 
     const repository = new ClientRepository()

@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize-typescript"
-import { ClientModel } from "../repository/client.model"
-import ClientRepository from "../repository/client.repository"
-import AddClientUseCase from "../usecase/add-client/add-client.usecase"
-import ClientAdmFacade from "./client-adm.facade"
-import ClientAdmFacadeFactory from "../factory/client-adm.facade.factory"
-import Address from "../../@shared/domain/value-object/address"
+import Address from '../../@shared/domain/value-object/address'
+import ClientAdmFacadeFactory from '../factory/client-adm.facade.factory'
+import { ClientModel } from '../repository/client.model'
+import ClientRepository from '../repository/client.repository'
+import AddClientUseCase from '../usecase/add-client/add-client.usecase'
+import ClientAdmFacade from './client-adm.facade'
 
 
 describe("Client Adm Facade test", () => {
@@ -27,8 +27,7 @@ describe("Client Adm Facade test", () => {
     await sequelize.close()
   })
 
-  it("should create a client", async () => {
-
+  it('should create a client', async () => {
     const repository = new ClientRepository()
     const addUsecase = new AddClientUseCase(repository)
     const facade = new ClientAdmFacade({
@@ -37,23 +36,23 @@ describe("Client Adm Facade test", () => {
     })
 
     const input = {
-      id: "1",
-      name: "Lucian",
-      email: "lucian@xpto.com",
-      document: "1234-5678",
-      address: new Address(
-        "Rua 123",
-        "99",
-        "Casa Verde",
-        "Criciúma",
-        "SC",
-        "88888-888",
-      )
+      id: '1',
+      name: 'Andre',
+      email: 'amfcom@gmail.com',
+      document: '92930654124',
+      address: new Address({
+        street: 'Rua João José',
+        number: '425',
+        complement: 'Casa Amarela',
+        city: 'João Pinheiro',
+        state: 'MG',
+        zipCode: '38770000',
+      })
     }
 
     await facade.add(input)
 
-    const client = await ClientModel.findOne({ where: { id: "1" } })
+    const client = await ClientModel.findOne({ where: { id: '1' } })
 
     expect(client).toBeDefined()
     expect(client.id).toBe(input.id)
@@ -63,8 +62,7 @@ describe("Client Adm Facade test", () => {
     expect(client.street).toBe(input.address.street)
   })
 
-  it("should find a client", async () => {
-
+  it('should find a client', async () => {
     // const repository = new ClientRepository()
     // const addUsecase = new AddClientUseCase(repository)
     // const findUseCase = new FindClientUseCase(repository)
@@ -76,23 +74,23 @@ describe("Client Adm Facade test", () => {
     const facade = ClientAdmFacadeFactory.create()
 
     const input = {
-      id: "1",
-      name: "Lucian",
-      email: "lucian@xpto.com",
-      document: "1234-5678",
-      address: new Address(
-        "Rua 123",
-        "99",
-        "Casa Verde",
-        "Criciúma",
-        "SC",
-        "88888-888"
-      )
+      id: '1',
+      name: 'Andre',
+      email: 'amfcom@gmail.com',
+      document: '92930654124',
+      address: new Address({
+        street: 'Rua João José',
+        number: '425',
+        complement: 'Casa Amarela',
+        city: 'João Pinheiro',
+        state: 'MG',
+        zipCode: '38770000',
+      }),
     }
 
     await facade.add(input)
 
-    const client = await facade.find({ id: "1" })
+    const client = await facade.find({ id: '1' })
 
     expect(client).toBeDefined()
     expect(client.id).toBe(input.id)

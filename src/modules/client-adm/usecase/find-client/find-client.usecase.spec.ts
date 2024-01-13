@@ -8,14 +8,14 @@ const client = new Client({
   name: "Lucian",
   email: "lucian@123.com",
   document: "1234-5678",
-  address: new Address(
-    "Rua 123",
-    "99",
-    "Casa Verde",
-    "Criciúma",
-    "SC",
-    "88888-888",
-  )
+  address: new Address({
+    street: 'Rua João José',
+    number: '425',
+    complement: 'Casa Amarela',
+    city: 'João Pinheiro',
+    state: 'MG',
+    zipCode: '38770000',
+  })
 })
 
 const MockRepository = () => {
