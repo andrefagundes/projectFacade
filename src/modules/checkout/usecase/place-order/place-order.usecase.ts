@@ -6,7 +6,6 @@ import PaymentFacadeInterface from '../../../payment/facade/facade.interface'
 import ProductAdmFacadeInterface from '../../../product-adm/facade/product-adm.facade.interface'
 import StoreCatalogFacadeInterface from '../../../store-catalog/facade/store-catalog.facade.interface'
 import Client from '../../domain/client.entity'
-
 import Order from '../../domain/order.entity'
 import Product from '../../domain/product.entity'
 import CheckoutGateway from '../../gateway/checkout.gateway'
@@ -19,6 +18,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
   private _checkoutRepository: CheckoutGateway
   private _invoiceFacade: InvoiceFacadeInterface
   private _paymentFacade: PaymentFacadeInterface
+
   constructor(
     productFacade: ProductAdmFacadeInterface,
     clientFacade: ClientAdmFacadeInterface,
@@ -34,6 +34,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     this._invoiceFacade = invoiceFacade
     this._paymentFacade = paymentFacade
   }
+
   async execute(input: PlaceOrderInputDto): Promise<PlaceOrderOutputDto> {
     const client = await this._clientFacade.find({ id: input.clientId })
 
@@ -48,7 +49,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     )
 
     const myClient = new Client({
-      Id: new Id(client.id),
+      id: new Id(client.id),
       name: client.name,
       email: client.email,
       document: client.document,

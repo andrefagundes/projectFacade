@@ -3,7 +3,7 @@ import BaseEntity from '../../@shared/domain/entity/base.entity'
 import Id from '../../@shared/domain/value-object/id.value-object'
 
 type ClientProps = {
-  Id?: Id
+  id?: Id
   name: string
   email: string
   document: string
@@ -27,7 +27,7 @@ export default class Client extends BaseEntity implements AggregateRoot {
   private _zipCode: string
 
   constructor(props: ClientProps) {
-    super(props.Id)
+    super(props.id)
     this._name = props.name
     this._email = props.email
     this._document = props.document
@@ -53,18 +53,23 @@ export default class Client extends BaseEntity implements AggregateRoot {
   get street(): string {
     return this._street
   }
+
   get number(): string {
     return this._number
   }
+
   get complement(): string {
     return this._complement
   }
+
   get city(): string {
     return this._city
   }
+
   get state(): string {
     return this._state
   }
+
   get zipCode(): string {
     return this._zipCode
   }
