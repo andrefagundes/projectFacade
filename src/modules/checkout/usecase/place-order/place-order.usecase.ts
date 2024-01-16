@@ -20,8 +20,8 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
   private _paymentFacade: PaymentFacadeInterface
 
   constructor(
-    productFacade: ProductAdmFacadeInterface,
     clientFacade: ClientAdmFacadeInterface,
+    productFacade: ProductAdmFacadeInterface,
     catalogFacade: StoreCatalogFacadeInterface,
     checkoutRepository: CheckoutGateway,
     invoiceFacade: InvoiceFacadeInterface,
