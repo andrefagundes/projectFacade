@@ -18,12 +18,6 @@ export class OrderModel extends Model {
   @Column({ allowNull: false })
   id: string
 
-  @HasOne(() => ClientModel)
-  client: ClientModel
-
-  @HasMany(() => CatalogProductModel)
-  products: CatalogProductModel[]
-
   @Column({ allowNull: false })
   status: string
 
@@ -32,4 +26,10 @@ export class OrderModel extends Model {
 
   @Column({ allowNull: false })
   updatedAt: Date
+
+  @HasOne(() => ClientModel)
+  client: ClientModel
+
+  @HasMany(() => CatalogProductModel)
+  products: CatalogProductModel[]
 }

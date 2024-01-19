@@ -1,12 +1,11 @@
-import { Sequelize } from "sequelize-typescript"
+import { Sequelize } from 'sequelize-typescript'
 import Address from '../../@shared/domain/value-object/address'
 import Id from '../../@shared/domain/value-object/id.value-object'
 import Client from '../domain/client.entity'
 import { ClientModel } from './client.model'
 import ClientRepository from './client.repository'
 
-describe("Client Repository test", () => {
-
+describe('Client Repository test', () => {
   let sequelize: Sequelize
 
   beforeEach(async () => {
@@ -14,7 +13,7 @@ describe("Client Repository test", () => {
       dialect: 'sqlite',
       storage: ':memory:',
       logging: false,
-      sync: { force: true }
+      sync: { force: true },
     })
 
     sequelize.addModels([ClientModel])
