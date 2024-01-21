@@ -1,9 +1,11 @@
 import { Sequelize } from 'sequelize-typescript'
 import Address from '../../@shared/domain/value-object/address'
 import Id from '../../@shared/domain/value-object/id.value-object'
-import Client from '../domain/client.entity'
+import { OrderModel } from '../../checkout/repository/order.model'
 import { ClientModel } from './client.model'
+import Client from '../domain/client.entity'
 import ClientRepository from './client.repository'
+import { CatalogProductModel } from '../../store-catalog/repository/product.model'
 
 describe('Client Repository test', () => {
   let sequelize: Sequelize
@@ -16,7 +18,7 @@ describe('Client Repository test', () => {
       sync: { force: true },
     })
 
-    sequelize.addModels([ClientModel])
+    sequelize.addModels([OrderModel, CatalogProductModel, ClientModel])
     await sequelize.sync()
   })
 
@@ -55,7 +57,7 @@ describe('Client Repository test', () => {
     expect(clientDb.complement).toEqual(client.address.complement)
     expect(clientDb.city).toEqual(client.address.city)
     expect(clientDb.state).toEqual(client.address.state)
-    expect(clientDb.zipcode).toEqual(client.address.zipCode)
+    expect(clientDb.zipCode).toEqual(client.address.zipCode)
     expect(clientDb.createdAt).toStrictEqual(client.createdAt)
     expect(clientDb.updatedAt).toStrictEqual(client.updatedAt)
   })
@@ -71,7 +73,7 @@ describe('Client Repository test', () => {
       complement: 'Casa Amarela',
       city: 'João Pinheiro',
       state: 'MG',
-      zipcode: '38770000',
+      zipCode: '38770000',
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -87,7 +89,7 @@ describe('Client Repository test', () => {
     expect(result.address.complement).toEqual(client.complement)
     expect(result.address.city).toEqual(client.city)
     expect(result.address.state).toEqual(client.state)
-    expect(result.address.zipCode).toEqual(client.zipcode)
+    expect(result.address.zipCode).toEqual(client.zipCode)
     expect(result.createdAt).toStrictEqual(client.createdAt)
     expect(result.updatedAt).toStrictEqual(client.updatedAt)
   })

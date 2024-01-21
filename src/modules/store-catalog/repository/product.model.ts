@@ -1,20 +1,31 @@
-import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript'
+import {
+  Column,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript'
+import { OrderModel } from '../../checkout/repository/order.model'
 
 @Table({
-  tableName: 'catalogProducts',
+  tableName: 'products',
   timestamps: false,
 })
 export class CatalogProductModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  id: string
+  declare id: string
 
   @Column({ allowNull: false })
-  name: string
+  declare name: string
 
   @Column({ allowNull: false })
-  description: string
+  declare description: string
 
   @Column({ allowNull: false })
-  salesPrice: number
+  declare salesPrice: number
+
+  @ForeignKey(() => OrderModel)
+  @Column({ allowNull: true })
+  declare order_id: string
 }

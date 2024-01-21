@@ -1,8 +1,8 @@
+import { OrderModel } from './order.model'
 import { ClientModel } from '../../client-adm/repository/client.model'
 import { CatalogProductModel } from '../../store-catalog/repository/product.model'
 import Order from '../domain/order.entity'
 import CheckoutGateway from '../gateway/checkout.gateway'
-import { OrderModel } from './order.model'
 
 export default class OrderRepository implements CheckoutGateway {
   async addOrder(order: Order): Promise<void> {

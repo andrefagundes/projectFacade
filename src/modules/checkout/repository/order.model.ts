@@ -1,10 +1,11 @@
 import {
-  Column,
-  HasMany,
-  HasOne,
   Model,
-  PrimaryKey,
   Table,
+  Column,
+  ForeignKey,
+  PrimaryKey,
+  BelongsTo,
+  HasMany,
 } from 'sequelize-typescript'
 import { ClientModel } from '../../client-adm/repository/client.model'
 import { CatalogProductModel } from '../../store-catalog/repository/product.model'
@@ -16,20 +17,24 @@ import { CatalogProductModel } from '../../store-catalog/repository/product.mode
 export class OrderModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  id: string
+  declare id: string
 
   @Column({ allowNull: false })
-  status: string
+  declare status: string
 
   @Column({ allowNull: false })
-  createdAt: Date
+  declare createdAt: Date
 
   @Column({ allowNull: false })
-  updatedAt: Date
+  declare updatedAt: Date
 
-  @HasOne(() => ClientModel)
-  client: ClientModel
+  @ForeignKey(() => ClientModel)
+  @Column({ allowNull: false })
+  declare clientId: string
+
+  @BelongsTo(() => ClientModel)
+  declare client: ClientModel
 
   @HasMany(() => CatalogProductModel)
-  products: CatalogProductModel[]
+  declare products: CatalogProductModel[]
 }

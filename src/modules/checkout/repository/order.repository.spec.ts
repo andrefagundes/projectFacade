@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize-typescript'
 import Id from '../../@shared/domain/value-object/id.value-object'
-import { ClientModel } from '../../client-adm/repository/client.model'
-import { CatalogProductModel } from '../../store-catalog/repository/product.model'
-import Client from '../domain/client.entity'
-import Order from '../domain/order.entity'
-import Product from '../domain/product.entity'
 import { OrderModel } from './order.model'
+import Order from '../domain/order.entity'
+import { ClientModel } from '../../client-adm/repository/client.model'
+import Client from '../domain/client.entity'
+import { CatalogProductModel } from '../../store-catalog/repository/product.model'
+import Product from '../domain/product.entity'
 import OrderRepository from './order.repository'
 
 describe('OrderRepository test', () => {
@@ -72,7 +72,7 @@ describe('OrderRepository test', () => {
     expect(orderDb.client.complement).toEqual(order.client.complement)
     expect(orderDb.client.city).toEqual(order.client.city)
     expect(orderDb.client.state).toEqual(order.client.state)
-    expect(orderDb.client.zipcode).toEqual(order.client.zipCode)
+    expect(orderDb.client.zipCode).toEqual(order.client.zipCode)
     expect(orderDb.products[0].id).toEqual(order.products[0].id.id)
     expect(orderDb.products[0].name).toBe(order.products[0].name)
     expect(orderDb.products[0].description).toBe(order.products[0].description)

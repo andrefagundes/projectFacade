@@ -1,14 +1,14 @@
 import { Sequelize } from "sequelize-typescript"
 import Address from '../../@shared/domain/value-object/address'
-import ClientAdmFacadeFactory from '../factory/client-adm.facade.factory'
+import { OrderModel } from '../../checkout/repository/order.model'
 import { ClientModel } from '../repository/client.model'
+import { CatalogProductModel } from '../../store-catalog/repository/product.model'
+import ClientAdmFacadeFactory from '../factory/client-adm.facade.factory'
 import ClientRepository from '../repository/client.repository'
 import AddClientUseCase from '../usecase/add-client/add-client.usecase'
 import ClientAdmFacade from './client-adm.facade'
 
-
-describe("Client Adm Facade test", () => {
-
+describe('Client Adm Facade test', () => {
   let sequelize: Sequelize
 
   beforeEach(async () => {
@@ -16,10 +16,10 @@ describe("Client Adm Facade test", () => {
       dialect: 'sqlite',
       storage: ':memory:',
       logging: false,
-      sync: { force: true }
+      sync: { force: true },
     })
 
-    sequelize.addModels([ClientModel])
+    sequelize.addModels([OrderModel, CatalogProductModel, ClientModel])
     await sequelize.sync()
   })
 
@@ -47,7 +47,7 @@ describe("Client Adm Facade test", () => {
         city: 'João Pinheiro',
         state: 'MG',
         zipCode: '38770000',
-      })
+      }),
     }
 
     await facade.add(input)
