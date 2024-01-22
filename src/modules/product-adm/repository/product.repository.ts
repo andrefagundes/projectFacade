@@ -13,7 +13,7 @@ export default class ProductRepository implements ProductGateway {
       stock: product.stock,
       createdAt: new Date(),
       updatedAt: new Date(),
-    });
+    })
   }
 
   async find(id: string): Promise<Product> {

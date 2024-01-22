@@ -1,5 +1,5 @@
 export interface PlaceOrderInputDto {
-  clientId: string
+  client_id: string
   products: {
     productId: string
   }[]

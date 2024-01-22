@@ -12,7 +12,7 @@ describe('PlaceOrderUseCase unit test', () => {
 
     it('Should throw error if no products are selected', async () => {
       const input: PlaceOrderInputDto = {
-        clientId: '0',
+        client_id: '0',
         products: [],
       }
 
@@ -35,7 +35,7 @@ describe('PlaceOrderUseCase unit test', () => {
       placeOrderUseCase['_productFacade'] = mockProductFacade
 
       let input: PlaceOrderInputDto = {
-        clientId: '0',
+        client_id: '0',
         products: [{ productId: '1' }],
       }
 
@@ -44,7 +44,7 @@ describe('PlaceOrderUseCase unit test', () => {
       ).rejects.toThrow(new Error('Product 1 is not available in stock'))
 
       input = {
-        clientId: '0',
+        client_id: '0',
         products: [{ productId: '0' }, { productId: '1' }],
       }
 
@@ -54,7 +54,7 @@ describe('PlaceOrderUseCase unit test', () => {
       expect(mockProductFacade.checkStock).toBeCalledTimes(3)
 
       input = {
-        clientId: '0',
+        client_id: '0',
         products: [{ productId: '0' }, { productId: '1' }, { productId: '2' }],
       }
 
@@ -135,7 +135,7 @@ describe('PlaceOrderUseCase unit test', () => {
       //@ts-expect-error - force set clientFacade
       placeOrderUseCase['_clientFacade'] = mockClientFacade
 
-      const input: PlaceOrderInputDto = { clientId: '0', products: [] }
+      const input: PlaceOrderInputDto = { client_id: '0', products: [] }
 
       await expect(placeOrderUseCase.execute(input)).rejects.toThrow(
         new Error('Client not found'),
@@ -158,7 +158,7 @@ describe('PlaceOrderUseCase unit test', () => {
       //@ts-expect-error - force set clientFacade
       placeOrderUseCase['_clientFacade'] = mockClientFacade
 
-      const input: PlaceOrderInputDto = { clientId: '1', products: [] }
+      const input: PlaceOrderInputDto = { client_id: '1', products: [] }
       await expect(placeOrderUseCase.execute(input)).rejects.toThrow(
         new Error('No products selected'),
       )
@@ -249,7 +249,7 @@ describe('PlaceOrderUseCase unit test', () => {
         )
 
         const input: PlaceOrderInputDto = {
-          clientId: '1',
+          client_id: '1',
           products: [{ productId: '1' }, { productId: '2' }],
         }
 
@@ -266,7 +266,7 @@ describe('PlaceOrderUseCase unit test', () => {
         expect(mockValidateProducts).toHaveBeenCalledTimes(1)
         expect(mockValidateProducts).toHaveBeenCalledWith(input)
         expect(mockGetProduct).toHaveBeenCalledTimes(2)
-        expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(1)
+        expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(0)
         expect(mockPaymentFacade.process).toHaveBeenCalledTimes(1)
         expect(mockPaymentFacade.process).toHaveBeenCalledWith({
           orderId: output.id,
@@ -289,7 +289,7 @@ describe('PlaceOrderUseCase unit test', () => {
         )
 
         const input: PlaceOrderInputDto = {
-          clientId: '1',
+          client_id: '1',
           products: [{ productId: '1' }, { productId: '2' }],
         }
 

@@ -12,39 +12,39 @@ export default class AddClientUseCase {
   }
 
   async execute(input: AddClientInputDto): Promise<AddClientOutputDto> {
-    const props = {
-      id: new Id(input.id) || new Id(),
-      name: input.name,
-      email: input.email,
-      document: input.document,
-      address: new Address({
-        street: input.address.street,
-        number: input.address.number,
-        complement: input.address.complement,
-        city: input.address.city,
-        state: input.address.state,
-        zipCode: input.address.zipCode,
-      }),
-    }
+      const props = {
+        id: new Id(input.id) || new Id(),
+        name: input.name,
+        email: input.email,
+        document: input.document,
+        address: new Address({
+          street: input.address.street,
+          number: input.address.number,
+          complement: input.address.complement,
+          city: input.address.city,
+          state: input.address.state,
+          zipCode: input.address.zipCode,
+        }),
+      }
 
-    const client = new Client(props)
-    await this._clientRepository.add(client)
+      const client = new Client(props)
+      await this._clientRepository.add(client)
 
-    return {
-      id: client.id.id,
-      name: client.name,
-      email: client.email,
-      document: client.document,
-      address: new Address({
-        street: input.address.street,
-        number: input.address.number,
-        complement: input.address.complement,
-        city: input.address.city,
-        state: input.address.state,
-        zipCode: input.address.zipCode,
-      }),
-      createdAt: client.createdAt,
-      updatedAt: client.updatedAt,
-    }
+      return {
+        id: client.id.id,
+        name: client.name,
+        email: client.email,
+        document: client.document,
+        address: new Address({
+          street: input.address.street,
+          number: input.address.number,
+          complement: input.address.complement,
+          city: input.address.city,
+          state: input.address.state,
+          zipCode: input.address.zipCode,
+        }),
+        createdAt: client.createdAt,
+        updatedAt: client.updatedAt,
+      }
   }
 }

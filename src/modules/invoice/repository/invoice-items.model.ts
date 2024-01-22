@@ -1,6 +1,7 @@
 import {
   BelongsTo,
   Column,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
@@ -16,14 +17,18 @@ export class InvoiceItemModel extends Model {
   @Column
   declare id: string
 
-  @BelongsTo(() => InvoiceModel, { foreignKey: 'invoice_id' })
-  declare Invoice: InvoiceModel[]
-
   @Column({ allowNull: false })
   declare name: string
 
   @Column({ allowNull: false })
   declare price: number
+
+  @BelongsTo(() => InvoiceModel, { foreignKey: 'invoice_id' })
+  declare invoice: InvoiceModel[]
+
+  @ForeignKey(() => InvoiceModel)
+  @Column({ allowNull: false })
+  declare invoice_id: string
 
   @Column({ allowNull: false })
   declare createdAt: Date

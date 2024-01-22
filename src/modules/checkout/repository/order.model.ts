@@ -29,10 +29,10 @@ export class OrderModel extends Model {
   declare updatedAt: Date
 
   @ForeignKey(() => ClientModel)
-  @Column({ allowNull: false })
-  declare clientId: string
+  @Column({ allowNull: false, field: 'client_id' })
+  declare client_id: string
 
-  @BelongsTo(() => ClientModel)
+  @BelongsTo(() => ClientModel, 'client_id')
   declare client: ClientModel
 
   @HasMany(() => CatalogProductModel)
