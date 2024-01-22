@@ -23,7 +23,7 @@ clientAdmRoute.post('/', async (req: Request, res: Response) => {
     }
     clientFacade.add(clientDto)
     res.status(201).send('Client add with success')
-  } catch (err) {
-    res.status(500).send(err)
+  } catch (error) {
+    res.status(500).send(error)
   }
 })

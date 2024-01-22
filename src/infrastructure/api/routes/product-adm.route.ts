@@ -4,11 +4,9 @@ import ProductAdmFacadeFactory from '../../../modules/product-adm/factory/facade
 export const productAdmRoute = express.Router()
 
 productAdmRoute.post('/', async (req: Request, res: Response) => {
-  const productFacade = ProductAdmFacadeFactory.create()
-
   try {
+    const productFacade = ProductAdmFacadeFactory.create()
     const productAdmDto = {
-      id: req.body.id,
       name: req.body.name,
       description: req.body.description,
       purchasePrice: req.body.purchasePrice,
